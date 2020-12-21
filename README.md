@@ -1,4 +1,4 @@
-# sdr-syms2bits
+# sdr-syms2bits-tx32u	
 
-This is all work in progress.  Trying to decode WS-1610 and TX22U IT+ data f
+This is all work in progressi/research.  Trying to decode TX32U IT+ data f
 rom RTL-SDR.
