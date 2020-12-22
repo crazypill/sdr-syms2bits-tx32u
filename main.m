@@ -80,6 +80,7 @@
 #define c2f( a ) (((a) * 1.8000) + 32)
 #define ms2mph( a ) ((a) * 2.23694)
 #define km2mph( a ) ((a) / 0.621371)
+#define millimeter2inch  0.0393700787402
 
 
 static bool s_latch = false;
@@ -303,71 +304,11 @@ int main(int argc, const char * argv[]) {
                 printf( ", " );
         }
 
-        
-//        int nibbles = buffer[9];
-//        uint8_t station_id = buffer[7] << 4 | (buffer[8] & 0xC);   // did I assemble this backwards?  strip out the error and aquire bits
-//        printf( "\n\nWeather[0x%x]: error: %d, aquire: %d, num quartets: %d\n", station_id, buffer[8] & 0x1, buffer[8] & 0x2, buffer[9] );
-//
-//        const char* compass[] = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
-//        const char* types[]   = { "temp:    ", "humidity:", "rain:    ", "wind:    ", "gust:    " };
-//        if( buffer[6] == 0xA )
-//        {
-//            unsigned char* q = &buffer[10];
-//            for( int i = 0; i < nibbles; i++ )
-//            {
-//                int type = q[0];
-//                const char* typeStr = NULL;
-//                if( type >= 0 && type <= kType_gust )
-//                    typeStr = types[type];
-//                else
-//                    typeStr = "unknown: ";
-//
-//                printf( "Quartet[%d]:  %s ", i, typeStr );
-//                printf( "%2u ", q[1] );
-//                printf( "%2u ", q[2] );
-//                printf( "%2u ", q[3] );
-//
-//                if( type == kType_temp )
-//                {
-//                     float t = 0;
-//                     t += q[1] * 100.0;
-//                     t += q[2] * 10.0;
-//                     t += q[3] * 1.0;
-//                     t = t / 10;
-//                     t -= 40;
-//                     printf( "(%0.2f°F, %0.2f°C)\n", c2f(t), t );
-//                }
-//                else if( type == kType_humidity )
-//                {
-//                     float h = 0;
-//                     h += q[1] * 100.0;
-//                     h += q[2] * 10.0;
-//                     h += q[3] * 1.0;
-//                     printf( "(%g%%)\n", h );
-//                }
-//                else if( type == kType_wind )
-//                {
-//                    // first nibble direction of wind vane (multiply by 22.5 to obtain degrees, here 0xe*22.5 = 315 degrees)
-//                    // next two nibbles wind speed in m per sec (i.e. no more than 255 m/s; 9th bit still not found)
-//                    const char* direction = compass[q[1]];
-//                    int windspeed = (q[2] << 4) | q[3];
-//                    float speed = windspeed / 10.0;
-//                    printf( "(%0.2f°, %0.2f mph, %0.2f m/s %s)\n", q[1] * 22.5f, ms2mph( speed ), speed, direction );
-//                }
-//                else if( type == kType_wind )
-//                {
-//                    // gust speed in m per sec
-//                    int windgust = q[1] * 256 + q[2];
-//                    printf( "(%2dm/s)\n", windgust );
-//                }
-//                else
-//                    printf( "\n" );
-//
-//                q += 4;
-//            }
-//        }
-//
-        
+        // do a little parsing... not sure what the first byte is-  but I gather it's a station ID,
+        // the middle three bytes are the rain counter. last byte is the CRC.
+        uint32_t rain_counter = (byte_buffer[4] << 16) | (byte_buffer[5] << 8) | byte_buffer[6];
+        printf( "\n\nRain[0x%x]: %0.2f mm (%0.2f inches)\n", byte_buffer[3], rain_counter * 0.5, (rain_counter * 0.5) * millimeter2inch );
+    
         printf( "\n" );
         free( buffer );
         free( byte_buffer );
