@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FADBA5B524A91C8400B72070"
-               BuildableName = "bits2bytes"
-               BlueprintName = "bits2bytes"
+               BuildableName = "bits2bytes-r"
+               BlueprintName = "bits2bytes-r"
                ReferencedContainer = "container:bits2bytes-tx32u.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FADBA5B524A91C8400B72070"
-            BuildableName = "bits2bytes"
-            BlueprintName = "bits2bytes"
+            BuildableName = "bits2bytes-r"
+            BlueprintName = "bits2bytes-r"
             ReferencedContainer = "container:bits2bytes-tx32u.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FADBA5B524A91C8400B72070"
-            BuildableName = "bits2bytes"
-            BlueprintName = "bits2bytes"
+            BuildableName = "bits2bytes-r"
+            BlueprintName = "bits2bytes-r"
             ReferencedContainer = "container:bits2bytes-tx32u.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
